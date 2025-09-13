@@ -1,64 +1,314 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-    <title>Sticky Footer</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Sticky Footer</title>
     <style>
-        .main2 {
-            min-height: 100%;
-            margin-top: 5%;
-            margin-bottom: 30%;
-            margin-left: 30%;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
-        .footer {
-            position: fixed;
-            bottom: 0;
-            left: 0;
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header */
+        .header {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header h1 {
+            color: white;
+            font-weight: 600;
+            font-size: 1.5rem;
+        }
+
+        /* Main content area */
+        .main-content {
+            flex: 1;
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
             width: 100%;
+        }
+
+        .content-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .content-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .content-card h2 {
+            color: #2d3748;
+            margin-bottom: 1rem;
+            font-size: 1.75rem;
+            font-weight: 700;
+        }
+
+        .content-card p {
+            color: #4a5568;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .feature-item {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .feature-item:hover {
+            background: rgba(255, 255, 255, 1);
+            transform: translateY(-4px);
+        }
+
+        .feature-icon {
+            width: 48px;
+            height: 48px;
+            margin: 0 auto 1rem;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 50%;
             display: flex;
             align-items: center;
-            background-color: rgb(247, 244, 244);
-            height: 60px;
-            color: rgb(60, 60, 60);
-            padding-left: 30%;
-            padding-right: 5%;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
         }
 
-        .footer p {
-            line-height: normal;
-            margin-left: 0;
+        /* Sticky Footer */
+        .footer {
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(20px);
+            color: white;
+            padding: 2rem 0;
+            margin-top: auto;
+            position: sticky;
+            bottom: 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        .footer .blue {
-            margin-top: 0;
-            padding: 20px;
-            padding-right: 30px;
-            border-radius: 8px;
-            background-color: rgb(117, 49, 244);
-            margin-left: auto;
-            margin-top: 0;
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-section h3 {
+            color: #fff;
+            margin-bottom: 1rem;
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            margin-bottom: 0.5rem;
+            display: block;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: #667eea;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background: #667eea;
+            transform: translateY(-2px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .header {
+                padding: 1rem;
+            }
+            
+            .main-content {
+                padding: 1rem;
+            }
+            
+            .content-card {
+                padding: 1.5rem;
+                margin-bottom: 1rem;
+            }
+            
+            .feature-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            
+            .footer-content {
+                padding: 0 1rem;
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+        }
+
+        /* Animation for page load */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .content-card {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        .content-card:nth-child(2) {
+            animation-delay: 0.1s;
+        }
+
+        .content-card:nth-child(3) {
+            animation-delay: 0.2s;
         }
     </style>
 </head>
-
 <body>
+    <!-- Header -->
+    <header class="header">
+        <h1>Modern Sticky Footer Demo</h1>
+    </header>
 
+    <!-- Main content -->
+    <main class="main-content">
+        <div class="content-card">
+            <h2>What is a Sticky Footer?</h2>
+            <p>A sticky footer is a footer that remains at the bottom of the viewport when there's minimal content, but moves down naturally when there's enough content to fill the page. This creates a better user experience by ensuring the footer is always visible and properly positioned.</p>
+        </div>
 
-    <div class="main2">
-        <h1>Sticky footer</h1>
-        <p>Pin a footer to the bottom of the viewport in desktop browsers with this</br> custom HTML and CSS.</p>
-        <p>
-            Use <a href="#">the sticky footer with a fixed navbar</a> if need be, too.
-        </p>
-    </div>
+        <div class="content-card">
+            <h2>Key Features</h2>
+            <div class="feature-grid">
+                <div class="feature-item">
+                    <div class="feature-icon">📱</div>
+                    <h3>Responsive</h3>
+                    <p>Works perfectly on all device sizes</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">🎨</div>
+                    <h3>Modern Design</h3>
+                    <p>Clean, contemporary styling with smooth animations</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Performance</h3>
+                    <p>Lightweight CSS with hardware acceleration</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">🔧</div>
+                    <h3>Flexible</h3>
+                    <p>Easy to customize and integrate</p>
+                </div>
+            </div>
+        </div>
 
-    <div class="footer">
-        <p> Place sticky footer content here. </p>
-        <div class="blue"></div>
-    </div>
+        <div class="content-card">
+            <h2>Implementation Benefits</h2>
+            <p>This implementation uses CSS Flexbox for a robust, cross-browser compatible solution. The body uses <code>display: flex</code> with <code>flex-direction: column</code>, and the main content area has <code>flex: 1</code> to expand and push the footer down. The footer uses <code>margin-top: auto</code> to stick to the bottom.</p>
+            <p>Additional enhancements include backdrop blur effects, smooth animations, responsive grid layouts, and modern glassmorphism design elements that create a premium user experience.</p>
+        </div>
+    </main>
 
+    <!-- Sticky Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>About</h3>
+                <p>This sticky footer implementation provides a modern, flexible solution for keeping your footer properly positioned across all devices and content lengths.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <a href="#">Documentation</a>
+                <a href="#">Examples</a>
+                <a href="#">Support</a>
+                <a href="#">Contact</a>
+            </div>
+            <div class="footer-section">
+                <h3>Connect</h3>
+                <p>Follow us for updates</p>
+                <div class="social-links">
+                    <a href="#" class="social-link">📧</a>
+                    <a href="#" class="social-link">🐦</a>
+                    <a href="#" class="social-link">📱</a>
+                    <a href="#" class="social-link">💼</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Modern Sticky Footer. Built with CSS Flexbox and modern web standards.</p>
+        </div>
+    </footer>
 </body>
-
 </html>
